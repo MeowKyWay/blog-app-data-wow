@@ -6,7 +6,7 @@ import TextField from "../components/user-interface/input/TextField";
 import Button from "../components/user-interface/input/Button";
 import Image from "next/image";
 
-export default function signInPage() {
+export default function SignInPage() {
 
     const { login } = useAuth();
     const [username, setUsername] = useState<string>("");
