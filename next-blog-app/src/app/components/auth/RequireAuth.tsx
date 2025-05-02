@@ -3,7 +3,7 @@
 import { useAuth } from "@/app/providers/AuthProvider";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import UnauthenticatedNotice from "../ui/UnauthenticateNotice";
+import UnauthenticatedNotice from "../user-interface/UnauthenticateNotice";
 
 export default function RequireAuth({ children }: { children: React.ReactNode }) {
     const { username } = useAuth();
@@ -11,7 +11,7 @@ export default function RequireAuth({ children }: { children: React.ReactNode })
 
     useEffect(() => {
         if (!username) {
-            router.push("/login");
+            router.push("/sign-in");
         }
     }, [username, router]);
 
