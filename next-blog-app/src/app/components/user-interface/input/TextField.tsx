@@ -17,7 +17,7 @@ export default function TextField({
             placeholder={placeholder}
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="mt-1 p-2 border-2 border-gray-300 rounded-md focus:outline-none focus:border-blue-500 bg-white"
+            className="m-[1px] p-2 border-1 border-gray-300 rounded-md focus:border-2 focus:m-0 focus:outline-none focus:border-blue-500 bg-white"
         />
     );
 }
