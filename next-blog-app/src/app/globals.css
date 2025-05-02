@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+h1 {
+  font-size: 28px;
+  font-weight: 600;
+}
+
 :root {
   --primary: #233931;
   --secondary: #49a56a;
@@ -11,12 +16,21 @@
   --selected: #d8e9e4;
   --warning: #f23636;
 
-  --on-background: #ffffff;
-  --on-foreground: #000000;
+  --color-primary: #000000;
+  --color-secondary: #49a369;
+  --color-tertiary: #939494;
+
+  --color-primary-variant: #ffffff;
 
   --placeholder: #9faeba;
 }
 
+.inter {
+  font-family: "Inter", sans-serif;
+}
+.castoro {
+  font-family: "Castoro", serif;
+}
 
 .bg-primary {
   background-color: var(--primary);
@@ -36,14 +50,22 @@
 .bg-selected {
   background-color: var(--selected);
 }
-
-
-.on-background {
-  color: var(--on-background);
+.bg-warning {
+  background-color: var(--warning);
 }
-.on-foreground {
-  color: var(--on-foreground);
+
+.text-primary {
+  color: var(--color-primary);
 }
-.placeholder {
+.text-secondary {
+  color: var(--color-secondary);
+}
+.text-tertiary {
+  color: var(--color-tertiary);
+}
+.text-primary-variant {
+  color: var(--color-primary-variant);
+}
+.text-placeholder {
   color: var(--placeholder);
 }
