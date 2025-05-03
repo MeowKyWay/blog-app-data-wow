@@ -21,6 +21,7 @@ h1 {
   --color-tertiary: #939494;
 
   --color-primary-variant: #ffffff;
+  --color-secondary-variant: #BBC2C0;
 
   --placeholder: #9faeba;
 
@@ -69,6 +70,9 @@ h1 {
 }
 .text-primary-variant {
   color: var(--color-primary-variant);
+}
+.text-secondary-variant {
+  color: var(--color-secondary-variant);
 }
 .text-placeholder {
   color: var(--placeholder);
