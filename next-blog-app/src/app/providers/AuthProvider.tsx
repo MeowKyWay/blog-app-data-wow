@@ -1,11 +1,11 @@
 'use client';
 
-import { useRouter } from 'next/router';
 import { createContext, useContext, useState, useEffect } from 'react';
+import { api } from '../lib/api';
 
 interface AuthContextType {
     username: string | null;
-    login: (username: string) => void;
+    login: (username: string) => Promise<Boolean>;
     logout: () => void;
 }
 
@@ -30,9 +30,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         };
     }, []);
 
-    const login = (username: string) => {
+    const login = async (username: string): Promise<Boolean> => {
+        const res = await api.post('/auth/sign-in', { username });
+        if (res.data.username !== username) {
+            return false;
+        }
         localStorage.setItem('username', username);
         setUsername(username);
+        return true;
     };
 
     const logout = () => {

@@ -5,11 +5,27 @@ import { useAuth } from "../providers/AuthProvider";
 import TextField from "../components/user-interface/input/TextField";
 import Button from "../components/user-interface/input/Button";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function SignInPage() {
 
     const { login } = useAuth();
     const [username, setUsername] = useState<string>("");
+
+    const router = useRouter();
+
+    async function handleLogin() {
+        if (username.trim() === "") {
+            alert("Please enter a username");
+            return;
+        }
+        if (await login(username)) {
+            router.push("/");
+        }
+        else {
+            alert('Login failed please try again');
+        }
+    }
 
     return (
         <div className="flex flex-col-reverse justify-end md:flex-row items-center h-screen bg-primary">
@@ -17,7 +33,7 @@ export default function SignInPage() {
                 <div className="px-4 md:py-0 w-screen md:w-[47%] flex flex-col gap-[20px]">
                     <h1 className="text-primary-variant mb-[20px] inter.classname inter">Sign In</h1>
                     <TextField label="Username" placeholder="Username" value={username} onChange={(value) => setUsername(value)} type="text"></TextField>
-                    <Button label="Sign In" onClick={() => login(username)}></Button>
+                    <Button label="Sign In" onClick={() => handleLogin()}></Button>
                 </div>
             </div>
             <div className="w-screen h-[375px] md:w-[44vw] md:h-screen bg-tertiary rounded-b-3xl md:rounded-l-3xl flex flex-col items-center justify-center">
