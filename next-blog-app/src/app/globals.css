@@ -23,6 +23,10 @@ h1 {
   --color-primary-variant: #ffffff;
 
   --placeholder: #9faeba;
+
+  --font-sm: 14px;
+  --font-md: 16px;
+  --font-lg: 18px;
 }
 
 .inter {
@@ -68,4 +72,14 @@ h1 {
 }
 .text-placeholder {
   color: var(--placeholder);
+}
+
+.text-sm {
+  font-size: var(--font-sm);
+}
+.text-md {
+  font-size: var(--font-md);
+}
+.text-lg {
+  font-size: var(--font-lg);
 }
