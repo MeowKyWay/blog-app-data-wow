@@ -5,6 +5,7 @@ import Button from "../../components/user-interface/input/Button";
 import { useState } from "react";
 import TextField from "../../components/user-interface/input/TextField";
 import { BlogList } from "./BlogList";
+import { CreatePostModal } from "./CreatePostModal";
 
 export function HomeScreen() {
 
@@ -12,6 +13,7 @@ export function HomeScreen() {
     const [tag, setTag] = useState<Tag | null>(null);
 
     const [showSearchBar, setShowSearchBar] = useState(false);
+    const [showCreatePostModal, setShowCreatePostModal] = useState(false);
 
     return (
         <div className="flex flex-row">
@@ -30,15 +32,19 @@ export function HomeScreen() {
                         type="text"
                         leadingIcon={<MagnifyingGlassIcon className="h-5 text-primary" />}
                     />
-                    <div className={`${showSearchBar ? 'hidden' : 'flex'} md:flex flex-row items-center gap-4`}><DropDown<Tag>
-                        placeholder="Community"
-                        value={tag}
-                        options={tags}
-                        onSelect={setTag}
-                        toString={(tag) => tag ?? ""}
-                    />
-                        <Button label="Create +" onClick={() => { }} type="submit" className={`${showSearchBar ? 'hidden' : 'block'} md:flex font-semibold text-sm px-4`} />
+                    <div className={`${showSearchBar ? 'hidden' : 'flex'} md:flex flex-row items-center gap-4`}>
+                        <DropDown<Tag>
+                            placeholder="Community"
+                            value={tag}
+                            options={tags}
+                            onSelect={setTag}
+                            toString={(tag) => tag ?? ""}
+                            backdropDimmed
+                        />
+                        <Button label="Create +" onClick={() => setShowCreatePostModal((prev) => !prev)} type="submit"
+                            className={`${showSearchBar ? 'hidden' : 'block'} md:flex font-semibold text-sm px-4`} />
                     </div>
+                    <CreatePostModal show={showCreatePostModal} onClose={() => setShowCreatePostModal(false)} />
                 </div>
                 <BlogList />
             </div>

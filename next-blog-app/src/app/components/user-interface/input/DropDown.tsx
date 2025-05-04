@@ -8,8 +8,10 @@ interface DropDownProps<T> {
     onSelect: (option: T) => void;
     toString: (value: T | null | undefined) => string;
     className?: string;
+    childClassName?: string;
     backdropDimmed?: boolean;
     keyExtractor?: (value: T) => string | number;
+    type?: 'primary' | 'secondary';
 }
 
 export default function DropDown<T>({
@@ -18,9 +20,11 @@ export default function DropDown<T>({
     options,
     onSelect,
     toString,
-    backdropDimmed = true,
+    backdropDimmed = false,
     className,
+    childClassName,
     keyExtractor,
+    type = 'primary',
 }: DropDownProps<T>) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -31,14 +35,16 @@ export default function DropDown<T>({
         setIsOpen(false);
     };
 
+    const typeClass = type === 'primary' ? 'bg-background' : 'bg-white outline outline-(--secondary) text-(--secondary)';
+
     return (
         <div className={"relative " + className}>
             <button
                 type="button"
                 onClick={toggleDropdown}
-                className="flex items-center justify-between w-full text-sm font-semibold 
-          bg-background rounded-md p-2 min-w-[100px]
-          hover:brightness-95 active:brightness-110 transition duration-100 ease-in-out"
+                className={`flex items-center justify-between w-full text-sm font-semibold 
+                    ${typeClass} rounded-md p-2 min-w-[100px]
+                    hover:brightness-95 active:brightness-110 transition duration-100 ease-in-out ` + childClassName}
                 aria-haspopup="listbox"
                 aria-expanded={isOpen}
             >
@@ -55,7 +61,7 @@ export default function DropDown<T>({
                             onClick={() => setIsOpen(false)} />
                     )}
                     <ul
-                        className="absolute z-10 mt-1 right-0 bg-white border border-gray-200 rounded-md shadow-lg max-h-100 overflow-auto"
+                        className="absolute z-10 mt-1 right-0 bg-white border border-gray-200 rounded-md shadow-lg min-w-full max-h-100 overflow-auto"
                         role="listbox"
                     >
                         {options.map((option) => {
