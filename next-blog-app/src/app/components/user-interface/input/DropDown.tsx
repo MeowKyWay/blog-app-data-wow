@@ -21,7 +21,6 @@ export default function DropDown<T>({
     keyExtractor,
 }: DropDownProps<T>) {
     const [isOpen, setIsOpen] = useState(false);
-    const dropdownRef = useRef<HTMLDivElement | null>(null);
 
     const toggleDropdown = () => setIsOpen((prev) => !prev);
 
@@ -30,23 +29,8 @@ export default function DropDown<T>({
         setIsOpen(false);
     };
 
-    // Close dropdown on outside click
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (
-                dropdownRef.current &&
-                !dropdownRef.current.contains(event.target as Node)
-            ) {
-                setIsOpen(false);
-            }
-        };
-
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, []);
-
     return (
-        <div className={"relative " + className} ref={dropdownRef}>
+        <div className={"relative " + className}>
             <button
                 type="button"
                 onClick={toggleDropdown}
@@ -61,25 +45,37 @@ export default function DropDown<T>({
             </button>
 
             {isOpen && (
-                <ul
-                    className="absolute z-10 mt-1 w-full bg-white border border-gray-200 rounded-md shadow-lg max-h-60 overflow-auto"
-                    role="listbox"
-                >
-                    {options.map((option) => {
-                        const key =
-                            keyExtractor?.(option) ?? toString(option) ?? Math.random();
-                        return (
-                            <li
-                                key={key}
-                                role="option"
-                                onClick={() => handleSelect(option)}
-                                className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-                            >
-                                {toString(option)}
-                            </li>
-                        );
-                    })}
-                </ul>
+                <>
+                    {isOpen && (
+                        <div className="fixed inset-0 bg-black/30 md:!bg-transparent md z-0" onClick={() => setIsOpen(false)}></div>
+                    )}
+                    <ul
+                        className="absolute z-10 mt-1 right-0 bg-white border border-gray-200 rounded-md shadow-lg max-h-100 overflow-auto"
+                        role="listbox"
+                    >
+                        {options.map((option) => {
+                            const key =
+                                keyExtractor?.(option) ?? toString(option) ?? Math.random();
+                            return (
+                                <li
+                                    key={key}
+                                    role="option"
+                                    onClick={() => handleSelect(option)}
+                                    className={`px-4 py-2 text-sm text-gray-700 
+                                    hover:bg-gray-100 cursor-pointer 
+                                    ${value === option ? 'bg-selected' : ''}
+                                    flex flex-row items-center justify-between`}
+                                >
+                                    {toString(option)}
+                                    <div className="w-10"></div>
+                                    {value === option && (
+                                        <span className="text-primary">✓</span>
+                                    )}
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </>
             )}
         </div>
     );
