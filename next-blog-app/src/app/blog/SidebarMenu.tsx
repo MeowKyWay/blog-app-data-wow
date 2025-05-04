@@ -24,11 +24,11 @@ export default function SidebarMenu({ isOpen }: Props) {
             md:static md:h-full md:!bg-(--background)`}>
             <nav className="flex flex-col gap-2">
                 <SidebarMenuItem icon={(<HomeIcon className={iconClassName} />)}
-                    label="Home" isSelected={path === '/home'}
-                    onClick={() => router.push('/home/')} />
+                    label="Home" isSelected={path === '/blog'}
+                    onClick={() => router.push('/blog/')} />
                 <SidebarMenuItem icon={(<PencilSquareIcon className={iconClassName} />)}
-                    label="My Blog" isSelected={path === '/home/my-blog'}
-                    onClick={() => router.push('/home/my-blog')} />
+                    label="My Blog" isSelected={path === '/blog/my-blog'}
+                    onClick={() => router.push('/blog/my-blog')} />
             </nav>
         </div>
     );

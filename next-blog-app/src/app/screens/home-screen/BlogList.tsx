@@ -3,6 +3,7 @@ import { UserCircle } from "@/app/components/user-interface/UserCircle";
 import { PostListItem } from "@/app/lib/type";
 import { usePosts } from "@/app/queries/usePosts";
 import { ChatBubbleOvalLeftIcon, UserCircleIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
 
 export function BlogList() {
 
@@ -22,9 +23,13 @@ export function BlogList() {
 }
 
 function BlogListItem({ post }: { post: PostListItem }) {
+
+    const router = useRouter();
+
     return (
         <div className="flex flex-col h-50 border-b box-border border-(--background) p-5 gap-2.5
-        hover:bg-black/5 hover:cursor-pointer active:bg-black/10 transition duration-200 ease-in-out">
+        hover:bg-black/5 hover:cursor-pointer active:bg-black/10 transition duration-200 ease-in-out"
+            onClick={() => router.push(`/blog/post/${post.id}`)}>
             <div className="flex flex-col gap-[15px] justify-start items-start">
                 <div className="flex flex-row items-center h-8 gap-2.5 text-tertiary font-sm font-medium">
                     <UserCircle />
