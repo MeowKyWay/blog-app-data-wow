@@ -8,6 +8,7 @@ import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import UpdatePostModal from "./UpdatePostModal";
+import DeletePostModal from "./DeletePostModal";
 
 export function MyBlogList({
     search,
@@ -97,12 +98,16 @@ function MyBlogListItem({ post, search, tag }: {
                     }}>
                         <PencilIcon className="h-4" />
                     </button>
-                    <button className="p-1 rounded-full hover:bg-black/5 active:bg-black/10">
+                    <button className="p-1 rounded-full hover:bg-black/5 active:bg-black/10" onClick={(e) => {
+                        e.stopPropagation();
+                        setShowDeleteModal(true);
+                    }}>
                         <TrashIcon className="h-4" />
                     </button>
                 </div>
             </div>
             <UpdatePostModal post={post} show={showEditModal} onClose={() => setShowEditModal(false)} />
+            <DeletePostModal post={post} show={showDeleteModal} onClose={() => setShowDeleteModal(false)} />
         </>
     );
 }

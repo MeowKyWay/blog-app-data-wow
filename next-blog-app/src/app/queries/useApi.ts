@@ -125,3 +125,22 @@ export function useUpdatePost() {
     },
   });
 }
+
+const deletePost = async (id: string) => {
+  console.log("[Posts] Deleting post...");
+  const res = await api.delete(`/posts/${id}`);
+  return res.data as PostListItem;
+};
+
+export function useDeletePost() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: deletePost,
+    onSuccess: (deletedPost) => {
+      queryClient.setQueryData<PostListItem[]>(["posts"], (oldPosts) =>
+        oldPosts?.filter((post) => post.id !== deletedPost.id)
+      );
+    },
+  });
+}
