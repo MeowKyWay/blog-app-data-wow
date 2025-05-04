@@ -13,11 +13,11 @@ import { UpdatePostDto } from './dto/update-post.dto';
 
 @Controller('posts')
 export class PostsController {
-  constructor(private readonly postService: PostsService) {}
+  constructor(private readonly postsService: PostsService) {}
 
   @Post()
   createPost(@Body() createPostDto: CreatePostDto) {
-    return this.postService.createPost(
+    return this.postsService.createPost(
       createPostDto.tag,
       createPostDto.title,
       createPostDto.content,
@@ -27,18 +27,18 @@ export class PostsController {
 
   @Get()
   getPosts() {
-    return this.postService.getPosts();
+    return this.postsService.getPosts();
   }
 
   @Get(':id')
   getPostById(@Param('id') id: string) {
-    console.log(this.postService.getPostById(Number(id)));
-    return this.postService.getPostById(Number(id));
+    console.log(this.postsService.getPostById(Number(id)));
+    return this.postsService.getPostById(Number(id));
   }
 
   @Patch(':id')
   updatePost(@Body() updatePostDto: UpdatePostDto, @Param('id') id: string) {
-    return this.postService.updatePost(
+    return this.postsService.updatePost(
       Number(id),
       updatePostDto.tag,
       updatePostDto.title,
@@ -48,6 +48,6 @@ export class PostsController {
 
   @Delete(':id')
   deletePost(@Param('id') id: string) {
-    return this.postService.deletePost(Number(id));
+    return this.postsService.deletePost(Number(id));
   }
 }
