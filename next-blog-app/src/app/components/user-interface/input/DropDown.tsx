@@ -8,6 +8,7 @@ interface DropDownProps<T> {
     onSelect: (option: T) => void;
     toString: (value: T | null | undefined) => string;
     className?: string;
+    backdropDimmed?: boolean;
     keyExtractor?: (value: T) => string | number;
 }
 
@@ -17,6 +18,7 @@ export default function DropDown<T>({
     options,
     onSelect,
     toString,
+    backdropDimmed = true,
     className,
     keyExtractor,
 }: DropDownProps<T>) {
@@ -47,7 +49,10 @@ export default function DropDown<T>({
             {isOpen && (
                 <>
                     {isOpen && (
-                        <div className="fixed inset-0 bg-black/30 md:!bg-transparent md z-0" onClick={() => setIsOpen(false)}></div>
+                        <div className={`fixed inset-0 
+                            ${backdropDimmed ? 'bg-black/30' : ''} 
+                            md:!bg-transparent md z-0`}
+                            onClick={() => setIsOpen(false)} />
                     )}
                     <ul
                         className="absolute z-10 mt-1 right-0 bg-white border border-gray-200 rounded-md shadow-lg max-h-100 overflow-auto"
