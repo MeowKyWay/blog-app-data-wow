@@ -1,23 +1,34 @@
+import { ReactNode } from "react";
+
 export default function TextField({
-    label,
     placeholder,
     value,
     onChange,
     type = "text",
+    leadingIcon,
+    className = "",
 }: {
-    label: string;
     placeholder: string;
     value: string;
     onChange: (value: string) => void;
     type?: string;
+    leadingIcon?: ReactNode;
+    className?: string;
 }) {
     return (
-        <input
-            type={type}
-            placeholder={placeholder}
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            className="m-[1px] p-2 border-1 border-gray-300 rounded-md focus:border-2 focus:m-0 focus:outline-none focus:border-blue-500 bg-white"
-        />
+        <div className={`flex flex-row items-center outline rounded-md px-2 ` + className}>
+            {leadingIcon && (
+                <div className="mr-2 flex-shrink-0 flex items-center justify-center h-4 w-4">
+                    {leadingIcon}
+                </div>
+            )}
+            <input
+                type={type}
+                placeholder={placeholder}
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                className="w-full py-1 px-1 outline-none bg-transparent"
+            />
+        </div>
     );
 }
