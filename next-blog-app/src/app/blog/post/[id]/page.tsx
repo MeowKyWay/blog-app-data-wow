@@ -37,9 +37,9 @@ export default function PostPage() {
     // You can fetch data here, e.g., using useEffect or directly from getServerSideProps / getStaticProps
     return (
         <div className='h-full overflow-y-auto bg-foreground'>
-            <div className='flex flex-row w-full'>
-                <div className='flex-1 hidden md:block bg-foreground'></div>
-                <div className='flex flex-col flex-16 pt-9 gap-10 px-4 md:px-0 bg-foreground'>
+            <div className='flex flex-row w-full bg-foreground pb-10'>
+                <div className='flex-1 hidden md:block'></div>
+                <div className='flex flex-col flex-16 pt-9 gap-10 px-4 md:px-0'>
                     <BackButton />
                     <div className='flex flex-col gap-6'>
                         <div className='flex flex-col gap-8 items-start'>
@@ -71,7 +71,7 @@ export default function PostPage() {
                         </div>
                     </div>
                 </div>
-                <div className='flex-3 hidden md:block bg-foreground'></div>
+                <div className='flex-3 hidden md:block'></div>
             </div>
         </div>
     );
