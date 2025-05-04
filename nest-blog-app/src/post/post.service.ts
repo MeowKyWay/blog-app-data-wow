@@ -1,5 +1,24 @@
 import { Injectable } from '@nestjs/common';
+import { Prisma } from 'generated/prisma';
 import { PrismaService } from 'src/prisma/prisma.service';
+
+const postSelect = Prisma.validator<Prisma.PostSelect>()({
+  id: true,
+  title: true,
+  content: true,
+  tag: true,
+  ownerId: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+const commentSelect = Prisma.validator<Prisma.CommentSelect>()({
+  id: true,
+  content: true,
+  createdAt: true,
+  updatedAt: true,
+  ownerId: true,
+});
 
 @Injectable()
 export class PostService {
@@ -23,13 +42,49 @@ export class PostService {
   }
 
   async getPosts() {
-    const posts = await this.prismaService.post.findMany();
-    return posts;
+    const posts = await this.prismaService.post.findMany({
+      select: {
+        ...postSelect,
+        owner: {
+          select: {
+            username: true,
+          },
+        },
+        _count: {
+          select: {
+            comments: true,
+          },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+    return posts.map((post) => ({
+      ...post,
+      commentsCount: post._count.comments,
+    }));
   }
 
   async getPostById(id: number) {
     const post = await this.prismaService.post.findUnique({
       where: { id },
+      select: {
+        ...postSelect,
+        owner: {
+          select: {
+            username: true,
+          },
+        },
+        comments: {
+          select: {
+            ...commentSelect,
+            owner: {
+              select: {
+                username: true,
+              },
+            },
+          },
+        },
+      },
     });
     if (post == null) {
       throw new Error('Post not found');
