@@ -31,7 +31,6 @@ export default function Home() {
             {view === "home" && <HomeScreen />}
             {view === "myBlog" && <div>⚙️ MyBlog </div>}
           </main>
-          <div className="hidden md:block md:flex-1"></div>
         </div>
       </div>
     </div>
