@@ -8,10 +8,18 @@ h2 {
   font-size: 16px;
   font-weight: 600;
 }
+h3 {
+  font-size: 14px;
+  font-weight: 500;
+}
+h4 {
+  font-size: 12px;
+  font-weight: 400;
+}
 p {
   font-size: 12px;
   font-weight: 400;
-  height: 15px;
+  line-height: 15px;
 }
 
 :root {

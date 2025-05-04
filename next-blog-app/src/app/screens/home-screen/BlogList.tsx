@@ -1,3 +1,4 @@
+import CommentCount from "@/app/blog/CommentCount";
 import { TagBanner } from "@/app/components/user-interface/TagBanner";
 import { UserCircle } from "@/app/components/user-interface/UserCircle";
 import { PostListItem } from "@/app/lib/type";
@@ -55,11 +56,7 @@ function BlogListItem({ post }: { post: PostListItem }) {
                         {post.content}
                     </p>
                 </div>
-                <div className="flex flex-row items-center
-                gap-[5px] text-tertiary text-xs font-medium">
-                    <ChatBubbleOvalLeftIcon className="h-[15px]" />
-                    {post.commentsCount + " Comments"}
-                </div>
+                <CommentCount count={post.commentsCount} />
             </div>
         </div>
     );
