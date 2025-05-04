@@ -1,7 +1,7 @@
 'use client';
 
 import { usePost } from '@/app/queries/usePosts';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import BackButton from './BackButton';
 import { UserCircle } from '@/app/components/user-interface/UserCircle';
 import { formatDistanceToNow } from 'date-fns';
@@ -10,6 +10,7 @@ import CommentCount from '../../CommentCount';
 import Button from '@/app/components/user-interface/input/Button';
 import { useState } from 'react';
 import CreateCommentPanel from './CreateCommentPanel';
+import CommtentList from './CommentList';
 
 export default function PostPage() {
     const { id } = useParams();
@@ -65,6 +66,7 @@ export default function PostPage() {
                             </div>
                             {showCreateCommentPanel && <CreateCommentPanel onClose={() => setShowCreateCommentPanel(prev => !prev)} />}
                         </div>
+                        <CommtentList comments={post.comments} />
                     </div>
                 </div>
                 <div className='flex-3 hidden md:block'></div>

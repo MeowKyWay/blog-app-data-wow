@@ -44,12 +44,14 @@ export type FullPost = {
   };
   createdAt: string;
   updatedAt: string;
-  comments: {
-    id: string;
-    content: string;
-    createdAt: string;
-    owner: {
-      username: string;
-    };
-  }[];
+  comments: Comment[];
+};
+
+export type Comment = {
+  id: string;
+  content: string;
+  createdAt: string;
+  owner: {
+    username: string;
+  };
 };
