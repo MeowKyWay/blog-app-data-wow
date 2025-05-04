@@ -21,7 +21,7 @@ const commentSelect = Prisma.validator<Prisma.CommentSelect>()({
 });
 
 @Injectable()
-export class PostService {
+export class PostsService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async createPost(

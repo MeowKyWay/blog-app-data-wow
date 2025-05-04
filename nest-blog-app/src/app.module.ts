@@ -5,12 +5,13 @@ import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { PrismaService } from './prisma/prisma.service';
 import { UserService } from './user/user.service';
-import { PostService } from './post/post.service';
-import { PostModule } from './post/post.module';
+import { PostsService } from './post/posts.service';
+import { PostsModule } from './post/posts.module';
+import { CommentModule } from './comment/comment.module';
 
 @Module({
-  imports: [AuthModule, PostModule],
+  imports: [AuthModule, PostsModule, CommentModule],
   controllers: [AppController, AuthController],
-  providers: [AppService, PrismaService, UserService, PostService],
+  providers: [AppService, PrismaService, UserService, PostsService],
 })
 export class AppModule {}

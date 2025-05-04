@@ -7,13 +7,13 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { PostService } from './post.service';
+import { PostsService } from './posts.service';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
 
 @Controller('posts')
-export class PostController {
-  constructor(private readonly postService: PostService) {}
+export class PostsController {
+  constructor(private readonly postService: PostsService) {}
 
   @Post()
   createPost(@Body() createPostDto: CreatePostDto) {
