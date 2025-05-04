@@ -1,6 +1,6 @@
 'use client';
 
-import { usePost } from '@/app/queries/usePosts';
+import { usePost } from '@/app/queries/useApi';
 import { useParams } from 'next/navigation';
 import BackButton from './BackButton';
 import { UserCircle } from '@/app/components/user-interface/UserCircle';
@@ -64,7 +64,7 @@ export default function PostPage() {
                             <div className={`${showCreateCommentPanel ? 'hidden' : 'block'}`}>
                                 <Button type='button' label='Add Comments' onClick={() => setShowCreateCommentPanel(prev => !prev)}></Button>
                             </div>
-                            {showCreateCommentPanel && <CreateCommentPanel onClose={() => setShowCreateCommentPanel(prev => !prev)} />}
+                            {showCreateCommentPanel && <CreateCommentPanel postId={post.id} onClose={() => setShowCreateCommentPanel(prev => !prev)} />}
                         </div>
                         <CommtentList comments={post.comments} />
                     </div>

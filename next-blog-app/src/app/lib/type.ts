@@ -50,8 +50,11 @@ export type FullPost = {
 export type Comment = {
   id: string;
   content: string;
-  createdAt: string;
+  postId: string;
+  ownerId: string;
   owner: {
     username: string;
   };
+  createdAt: string;
+  updatedAt: string;
 };

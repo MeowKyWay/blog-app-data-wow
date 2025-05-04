@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "../lib/api";
-import { FullPost, PostListItem } from "../lib/type";
+import { Comment, FullPost, PostListItem } from "../lib/type";
 
 const fetchPosts = async () => {
   console.log("[Posts] Fetching...");
@@ -12,16 +12,19 @@ export function usePosts() {
   return useQuery({
     queryKey: ["posts"],
     queryFn: fetchPosts,
+    staleTime: 1000 * 60 * 30,
   });
 }
 
 export const usePost = (id: string) => {
   return useQuery({
-    queryKey: ["posts", id],
+    queryKey: ["posts", String(id)],
     queryFn: async () => {
+      console.log("[Posts] Fetching post...");
       const res = await api.get(`/posts/${id}`);
       return res.data as FullPost;
     },
+    staleTime: 1000 * 60 * 30,
   });
 };
 
@@ -46,6 +49,43 @@ export function useCreatePost() {
         if (!oldPosts) return [newPost];
         return [newPost, ...oldPosts]; // Add new post to the top
       });
+    },
+  });
+}
+
+const createComment = async (comment: {
+  content: string;
+  postId: string;
+  ownerId: number;
+}) => {
+  console.log("[Posts] Creating comment...");
+  const res = await api.post("/comments", comment);
+  return res.data as Comment;
+};
+
+export function useCreateComment() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: createComment,
+    onSuccess: (newComment) => {
+      queryClient.setQueryData<FullPost>(
+        ["posts", String(newComment.postId)],
+        (oldPost) => {
+          if (!oldPost) return oldPost;
+          return {
+            ...oldPost,
+            comments: [newComment, ...oldPost.comments],
+          };
+        }
+      );
+      queryClient.setQueryData<PostListItem[]>(["posts"], (oldPosts) =>
+        oldPosts?.map((post) =>
+          post.id === newComment.postId
+            ? { ...post, commentCount: post.commentsCount + 1 }
+            : post
+        )
+      );
     },
   });
 }

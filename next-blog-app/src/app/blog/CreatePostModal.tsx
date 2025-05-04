@@ -7,7 +7,7 @@ import TextField from "@/app/components/user-interface/input/TextField";
 import { Modal } from "@/app/components/user-interface/Modal";
 import { Tag, tags } from "@/app/lib/type";
 import { useAuth } from "@/app/providers/AuthProvider";
-import { useCreatePost } from "@/app/queries/usePosts";
+import { useCreatePost } from "@/app/queries/useApi";
 import { useState } from "react";
 
 export function CreatePostModal({ show, onClose }: { show: boolean; onClose: () => void }) {

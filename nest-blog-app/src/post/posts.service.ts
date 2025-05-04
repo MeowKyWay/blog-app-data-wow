@@ -15,9 +15,10 @@ const postSelect = Prisma.validator<Prisma.PostSelect>()({
 const commentSelect = Prisma.validator<Prisma.CommentSelect>()({
   id: true,
   content: true,
+  postId: true,
+  ownerId: true,
   createdAt: true,
   updatedAt: true,
-  ownerId: true,
 });
 
 @Injectable()
@@ -90,6 +91,7 @@ export class PostsService {
               },
             },
           },
+          orderBy: { createdAt: 'desc' },
         },
       },
     });

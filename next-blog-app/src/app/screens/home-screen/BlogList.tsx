@@ -2,7 +2,7 @@ import CommentCount from "@/app/blog/CommentCount";
 import { TagBanner } from "@/app/components/user-interface/TagBanner";
 import { UserCircle } from "@/app/components/user-interface/UserCircle";
 import { PostListItem } from "@/app/lib/type";
-import { usePosts } from "@/app/queries/usePosts";
+import { usePosts } from "@/app/queries/useApi";
 import { ChatBubbleOvalLeftIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 
