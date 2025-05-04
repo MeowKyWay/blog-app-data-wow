@@ -2,11 +2,11 @@ import CommentCount from "@/app/blog/CommentCount";
 import { TagBanner } from "@/app/components/user-interface/TagBanner";
 import { UserCircle } from "@/app/components/user-interface/UserCircle";
 import { PostListItem, Tag } from "@/app/lib/type";
+import { useAuth } from "@/app/providers/AuthProvider";
 import { usePosts } from "@/app/queries/useApi";
-import { ChatBubbleOvalLeftIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/navigation";
 
-export function BlogList({
+export function MyBlogList({
     search,
     tag,
 }: {
@@ -15,13 +15,16 @@ export function BlogList({
 }) {
 
     const { data: posts, isLoading } = usePosts();
+    const { userId } = useAuth();
+
+    const filteredPosts = posts?.filter((post) => String(post.ownerId)=== String(userId));
 
     return (
         <div className="flex flex-col rounded-xl bg-foreground">
             <div className="min-h-[400px]">
                 <div className="flex flex-col">
-                    {(posts ?? []).map((post) => (
-                        <BlogListItem search={search} key={post.id} post={post} tag={tag} />
+                    {(filteredPosts ?? []).map((post) => (
+                        <MyBlogListItem search={search} key={post.id} post={post} tag={tag} />
                     ))}
                 </div>
             </div>
@@ -29,7 +32,7 @@ export function BlogList({
     );
 }
 
-function BlogListItem({ post, search, tag }: {
+function MyBlogListItem({ post, search, tag }: {
     post: PostListItem, search: string, tag: Tag | null
 }) {
 

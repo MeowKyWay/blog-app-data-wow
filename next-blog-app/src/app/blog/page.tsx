@@ -49,7 +49,7 @@ export default function BlogScreen() {
                         </div>
                         <CreatePostModal show={showCreatePostModal} onClose={() => setShowCreatePostModal(false)} />
                     </div>
-                    <BlogList />
+                    <BlogList search={search} tag={tag} />
                 </div>
                 <div className="flex-1 hidden md:block"></div>
             </div>
