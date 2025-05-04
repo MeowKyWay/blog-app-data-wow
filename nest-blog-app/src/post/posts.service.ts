@@ -110,6 +110,18 @@ export class PostsService {
     const post = await this.prismaService.post.update({
       where: { id },
       data,
+      include: {
+        owner: {
+          select: {
+            username: true,
+          },
+        },
+        _count: {
+          select: {
+            comments: true,
+          },
+        },
+      },
     });
 
     return post;

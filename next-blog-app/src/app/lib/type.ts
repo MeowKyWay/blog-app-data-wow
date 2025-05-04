@@ -20,7 +20,7 @@ export const tags: Tag[] = [
 // For list view
 export type PostListItem = {
   id: string;
-  tag: string;
+  tag: Tag;
   title: string;
   content: string;
   ownerId: string;

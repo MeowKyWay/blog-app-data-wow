@@ -89,3 +89,39 @@ export function useCreateComment() {
     },
   });
 }
+
+const updatePost = async (post: {
+  id: string;
+  tag: string;
+  title: string;
+  content: string;
+}) => {
+  console.log("[Posts] Updating post...");
+  const res = await api.patch(`/posts/${post.id}`, post);
+  return res.data as PostListItem;
+};
+
+export function useUpdatePost() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: updatePost,
+    onSuccess: (updatedPost) => {
+      queryClient.setQueryData<FullPost>(
+        ["posts", String(updatedPost.id)],
+        (oldPost) => {
+          if (!oldPost) return oldPost;
+          return {
+            ...oldPost,
+            ...updatedPost,
+          };
+        }
+      );
+      queryClient.setQueryData<PostListItem[]>(["posts"], (oldPosts) =>
+        oldPosts?.map((post) =>
+          post.id === updatedPost.id ? updatedPost : post
+        )
+      );
+    },
+  });
+}
