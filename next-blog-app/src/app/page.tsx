@@ -26,10 +26,13 @@ export default function Home() {
       </div>
       <div className="flex flex-row w-screen h-[calc(100vh-72px)] md:h-[calc(100vh-60px)] relative">
         <SidebarMenu onSelect={setView} selected={view} isOpen={isOpen} />
-        <main className="flex flex-col w-full h-full bg-background p-4 overflow-y-scroll">
-          {view === "home" && <HomeScreen />}
-          {view === "myBlog" && <div>⚙️ MyBlog </div>}
-        </main>
+        <div className="flex flex-row overflow-y-scroll flex-4">
+          <main className="flex flex-col flex-3 h-full bg-background p-4">
+            {view === "home" && <HomeScreen />}
+            {view === "myBlog" && <div>⚙️ MyBlog </div>}
+          </main>
+          <div className="hidden md:block md:flex-1"></div>
+        </div>
       </div>
     </div>
   );

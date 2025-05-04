@@ -14,7 +14,7 @@ export function HomeScreen() {
     const [showSearchBar, setShowSearchBar] = useState(false);
 
     return (
-        <div className="flex flex-col gap-5 mt-12 pl-4 pr-4 md:pr-[284px]">
+        <div className="flex flex-col gap-5 mt-12 px-4">
             <div className="flex flex-row items-center justify-between gap-4">
                 <button className="rounded-full bg-background hover:brightness-95 active:brightness-110 p-2 md:hidden" onClick={() => setShowSearchBar((prev) => !prev)}>
                     {!showSearchBar && <MagnifyingGlassIcon className="h-4.5 text-primary block md:hidden" />}
