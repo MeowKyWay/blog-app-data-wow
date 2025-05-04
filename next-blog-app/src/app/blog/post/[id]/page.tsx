@@ -8,30 +8,23 @@ import { formatDistanceToNow } from 'date-fns';
 import { TagBanner } from '@/app/components/user-interface/TagBanner';
 import CommentCount from '../../CommentCount';
 import Button from '@/app/components/user-interface/input/Button';
+import { useState } from 'react';
+import CreateCommentPanel from './CreateCommentPanel';
 
 export default function PostPage() {
     const { id } = useParams();
 
-    if (!id) {
-        return <div>Post ID is required</div>;
-    }
-    if (typeof id !== 'string') {
-        return <div>Post ID must be a string</div>;
-    }
+    if (!id) return <div>Post ID is required</div>;
+    if (typeof id !== 'string') return <div>Post ID must be a string</div>;
 
     const { data: post, isLoading, isError } = usePost(id);
 
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
-    if (isError) {
-        return <div>Error loading post</div>;
-    }
-    if (!post) {
-        return <div>Post not found</div>;
-    }
+    const [showCreateCommentPanel, setShowCreateCommentPanel] = useState(false);
 
-    console.log(post);
+    if (isLoading) return <div>Loading...</div>;
+    if (isError) return <div>Error loading post</div>;
+    if (!post) return <div>Post not found</div>;
+
     const timeAgo = formatDistanceToNow(new Date(post.createdAt ?? ''), { addSuffix: true });
 
     // You can fetch data here, e.g., using useEffect or directly from getServerSideProps / getStaticProps
@@ -67,7 +60,10 @@ export default function PostPage() {
                                     <CommentCount count={post.comments.length} />
                                 </div>
                             </div>
-                            <Button type='button' label='Add Comments' onClick={() => { }}></Button>
+                            <div className={`${showCreateCommentPanel ? 'hidden' : 'block'}`}>
+                                <Button type='button' label='Add Comments' onClick={() => setShowCreateCommentPanel(prev => !prev)}></Button>
+                            </div>
+                            {showCreateCommentPanel && <CreateCommentPanel onClose={() => setShowCreateCommentPanel(prev => !prev)} />}
                         </div>
                     </div>
                 </div>
