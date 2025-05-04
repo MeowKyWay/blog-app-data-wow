@@ -1,5 +1,6 @@
 'use client';
 
+import RequireAuth from "@/app/components/auth/RequireAuth";
 import Button from "@/app/components/user-interface/input/Button";
 import TextAreaField from "@/app/components/user-interface/input/TextAreaField";
 import { Modal } from "@/app/components/user-interface/Modal";
@@ -14,7 +15,7 @@ export default function CreateCommentPanel({
     const [content, setContent] = useState<string>("");
 
     return (
-        <>
+        <RequireAuth>
             <div className="block md:hidden">
                 <Modal title="Add Comments" confirmLabel="Post" onClose={onClose} onConfirm={() => { }} onCancle={onClose}>
                     <div className="flex flex-col gap-3.5">
@@ -33,6 +34,6 @@ export default function CreateCommentPanel({
                     <Button label="Post" type="submit" onClick={() => { }} className="w-24" />
                 </div>
             </div>
-        </>
+        </RequireAuth>
     );
 }
