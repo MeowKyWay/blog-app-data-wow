@@ -5,6 +5,7 @@ import { api } from '../lib/api';
 
 interface AuthContextType {
     username: string | null;
+    userId: number | null;
     login: (username: string) => Promise<Boolean>;
     logout: () => void;
 }
@@ -13,11 +14,14 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);;
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [username, setUsername] = useState(null as string | null);
+    const [userId, setUserId] = useState(null as number | null);
 
     useEffect(() => {
         const handleStorageChange = () => {
             const storedUsername = localStorage.getItem('username');
+            const storedUserId = localStorage.getItem('userId');
             setUsername(storedUsername);
+            setUserId(Number(storedUserId));
         };
         // Initial load
         handleStorageChange();
@@ -37,16 +41,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         }
         localStorage.setItem('username', username);
         setUsername(username);
+        localStorage.setItem('userId', res.data.id);
+        setUserId(res.data.id);
         return true;
     };
 
     const logout = () => {
         localStorage.removeItem('username');
+        localStorage.removeItem('userId');
         setUsername(null);
+        setUserId(null);
     };
 
     return (
-        <AuthContext.Provider value={{ username, login, logout }}>
+        <AuthContext.Provider value={{ username, userId, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

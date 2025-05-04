@@ -37,6 +37,13 @@ export class PostService {
         content,
         ownerId,
       },
+      include: {
+        owner: {
+          select: {
+            username: true,
+          }
+        }
+      }
     });
     return post;
   }

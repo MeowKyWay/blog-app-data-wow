@@ -18,7 +18,7 @@ export default function SidebarMenu({ isOpen }: Props) {
     const iconClassName = "w-6 h-6 stroke-2";
 
     return (
-        <div className={`flex-1 bg-primary pt-8 h-full absolute z-10
+        <div className={`w-[280px] md:flex-1 bg-primary pt-8 h-full absolute z-10
             transition-[right] duration-300 ease-in-out 
             top-0 ${isOpen ? 'right-0' : '-right-70'} h-full 
             md:static md:h-full md:!bg-(--background)`}>

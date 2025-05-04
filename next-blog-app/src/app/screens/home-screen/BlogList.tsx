@@ -40,7 +40,7 @@ function BlogListItem({ post }: { post: PostListItem }) {
             </div>
             <div className="flex flex-col gap-2.5">
                 <div className="flex flex-col gap-[2px]">
-                    <h2>{post.title}</h2>
+                    <h2 className="line-clamp-1">{post.title}</h2>
                     <p style={{
                         display: '-webkit-box',
                         WebkitLineClamp: 2,

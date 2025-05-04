@@ -32,7 +32,7 @@ export default function SignInPage() {
             <div className="flex flex-col items-center justify-center w-7/12 my-auto">
                 <div className="px-4 md:py-0 w-screen md:w-[47%] flex flex-col gap-[20px]">
                     <h1 className="text-primary-variant mb-[20px] inter.classname inter">Sign In</h1>
-                    <TextField placeholder="Username" value={username} onChange={(value) => setUsername(value)} type="text"></TextField>
+                    <TextField placeholder="Username" value={username} onChange={(value) => setUsername(value)} type="text" className="bg-foreground"></TextField>
                     <Button label="Sign In" onClick={() => handleLogin()}></Button>
                 </div>
             </div>

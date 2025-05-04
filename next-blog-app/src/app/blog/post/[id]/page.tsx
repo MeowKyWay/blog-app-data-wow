@@ -36,41 +36,43 @@ export default function PostPage() {
 
     // You can fetch data here, e.g., using useEffect or directly from getServerSideProps / getStaticProps
     return (
-        <div className='flex flex-row h-full w-full bg-foreground'>
-            <div className='flex-1 hidden md:block'></div>
-            <div className='flex flex-col flex-16 mt-9 gap-10 px-4 md:px-0'>
-                <BackButton />
-                <div className='flex flex-col gap-6'>
-                    <div className='flex flex-col gap-8 items-start'>
-                        <div className='flex flex-col gap-4'>
-                            <div className='flex flex-col gap-2.5 items-start'>
-                                <div className='flex flex-row items-center gap-2.5 h-12'>
-                                    <UserCircle />
-                                    <h3>{post?.owner.username}</h3>
-                                    <h4 className='text-tertiary'>{timeAgo}</h4>
+        <div className='h-full overflow-y-auto bg-foreground'>
+            <div className='flex flex-row w-full'>
+                <div className='flex-1 hidden md:block bg-foreground'></div>
+                <div className='flex flex-col flex-16 pt-9 gap-10 px-4 md:px-0 bg-foreground'>
+                    <BackButton />
+                    <div className='flex flex-col gap-6'>
+                        <div className='flex flex-col gap-8 items-start'>
+                            <div className='flex flex-col gap-4'>
+                                <div className='flex flex-col gap-2.5 items-start'>
+                                    <div className='flex flex-row items-center gap-2.5 h-12'>
+                                        <UserCircle />
+                                        <h3>{post?.owner.username}</h3>
+                                        <h4 className='text-tertiary'>{timeAgo}</h4>
+                                    </div>
+                                    <TagBanner tag={`${post.tag}`} />
                                 </div>
-                                <TagBanner tag={`${post.tag}`} />
-                            </div>
-                            <div className='flex flex-col gap-7'>
-                                <div className='flex flex-col gap-2'>
-                                    <h1>{post.title}</h1>
-                                    <p style={{
-                                        whiteSpace: 'pre-wrap',
-                                        wordBreak: 'break-word',
-                                        lineHeight: '15px',
-                                        margin: 0,
-                                    }}>
-                                        {post.content}
-                                    </p>
+                                <div className='flex flex-col gap-7'>
+                                    <div className='flex flex-col gap-2'>
+                                        <h1>{post.title}</h1>
+                                        <p style={{
+                                            whiteSpace: 'pre-wrap',
+                                            wordBreak: 'break-word',
+                                            lineHeight: '15px',
+                                            margin: 0,
+                                        }}>
+                                            {post.content}
+                                        </p>
+                                    </div>
+                                    <CommentCount count={post.comments.length} />
                                 </div>
-                                <CommentCount count={post.comments.length} />
                             </div>
+                            <Button type='button' label='Add Comments' onClick={() => { }}></Button>
                         </div>
-                        <Button type='button' label='Add Comments' onClick={() => {}}></Button>
                     </div>
                 </div>
+                <div className='flex-3 hidden md:block bg-foreground'></div>
             </div>
-            <div className='flex-3 hidden md:block'></div>
         </div>
     );
 }

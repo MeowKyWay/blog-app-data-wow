@@ -29,8 +29,8 @@ export default function HomeLayout({
                 </div>
                 <div className="flex flex-row w-screen h-[calc(100vh-72px)] md:h-[calc(100vh-60px)] relative">
                     <SidebarMenu isOpen={isOpen} />
-                    <div className="flex flex-row overflow-y-auto flex-4">
-                        <main className="flex flex-col flex-3 h-full bg-background">
+                    <div className="flex-4">
+                        <main className="h-full bg-background">
                             {children}
                         </main>
                     </div>
