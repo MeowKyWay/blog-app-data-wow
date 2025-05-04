@@ -6,7 +6,7 @@ import TextField from "../components/user-interface/input/TextField";
 import DropDown from "../components/user-interface/input/DropDown";
 import { Tag, tags } from "../lib/type";
 import Button from "../components/user-interface/input/Button";
-import { CreatePostModal } from "../screens/home-screen/CreatePostModal";
+import { CreatePostModal } from "./CreatePostModal";
 import { BlogList } from "../screens/home-screen/BlogList";
 
 export default function BlogScreen() {

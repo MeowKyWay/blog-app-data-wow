@@ -16,17 +16,17 @@ export function CreatePostModal({ show, onClose }: { show: boolean; onClose: () 
     const [title, setTitle] = useState<string>("");
     const [content, setContent] = useState<string>("");
 
-    const { username, userId } = useAuth();
+    const { userId } = useAuth();
 
     const { mutate: createPost, isPending, error } = useCreatePost();
 
     const handleCreatePost = async () => {
-        if (!tag) return;
+        if (!tag || !userId) return;
         await createPost({
             tag: tag,
             title: title,
             content: content,
-            ownerId: 1
+            ownerId: userId,
         });
         onClose();
     };
