@@ -7,6 +7,7 @@ import { UserCircle } from '@/app/components/user-interface/UserCircle';
 import { formatDistanceToNow } from 'date-fns';
 import { TagBanner } from '@/app/components/user-interface/TagBanner';
 import CommentCount from '../../CommentCount';
+import Button from '@/app/components/user-interface/input/Button';
 
 export default function PostPage() {
     const { id } = useParams();
@@ -40,7 +41,7 @@ export default function PostPage() {
             <div className='flex flex-col flex-16 mt-9 gap-10 px-4 md:px-0'>
                 <BackButton />
                 <div className='flex flex-col gap-6'>
-                    <div className='flex flex-col gap-8'>
+                    <div className='flex flex-col gap-8 items-start'>
                         <div className='flex flex-col gap-4'>
                             <div className='flex flex-col gap-2.5 items-start'>
                                 <div className='flex flex-row items-center gap-2.5 h-12'>
@@ -51,7 +52,7 @@ export default function PostPage() {
                                 <TagBanner tag={`${post.tag}`} />
                             </div>
                             <div className='flex flex-col gap-7'>
-                                <div className='flex flex-col gap-4'>
+                                <div className='flex flex-col gap-2'>
                                     <h1>{post.title}</h1>
                                     <p style={{
                                         whiteSpace: 'pre-wrap',
@@ -65,6 +66,7 @@ export default function PostPage() {
                                 <CommentCount count={post.comments.length} />
                             </div>
                         </div>
+                        <Button type='button' label='Add Comments' onClick={() => {}}></Button>
                     </div>
                 </div>
             </div>
